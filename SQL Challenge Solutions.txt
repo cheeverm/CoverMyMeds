@@ -1,0 +1,61 @@
+SQL Problems
+
+
+1.	List all of the movies ordered alphabetically.
+
+SELECT *
+FROM movies
+ORDER BY title
+
+2.	List the three oldest people from oldest to youngest.
+
+SELECT TOP 3 *
+FROM people
+ORDER BY birthdate
+
+3.	List all of the people who have directed a movie.
+
+SELECT DISTINCT p.name
+FROM people as p
+JOIN mtm_credits as m ON p.id = m.person_id
+join roles as r ON m.role_id = r.id
+WHERE r.role = 'Director'
+
+
+4.	Which director has directed the most movies in our database?
+
+SELECT TOP 1 p.name, COUNT(mv.id) as totalMovies
+FROM people as p
+JOIN mtm_credits as m ON p.id = m.person_id
+JOIN roles as r ON m.role_id = r.id
+JOIN movies as mv ON mv.id = m.movie_id
+WHERE r.role = 'Director'
+GROUP BY p.name
+ORDER BY totalMovies DESC
+
+5.	Which people are both directors and actors?
+
+SELECT name
+FROM (SELECT DISTINCT p.name, r.role
+      FROM people as p
+      JOIN mtm_credits as m ON p.id = m.person_id
+      JOIN roles as r ON m.role_id = r.id
+      JOIN movies as mv ON mv.id = m.movie_id
+      GROUP BY p.name, r.role) as x
+GROUP BY name
+having COUNT(*) = 2
+
+6.	List all of the people who have worked with Ben Affleck.
+
+
+SELECT DISTINCT p.name
+FROM people as p
+JOIN mtm_credits as m ON p.id = m.person_id
+JOIN movies as mv ON mv.id = m.movie_id
+WHERE mv.title IN (SELECT DISTINCT mv.title
+                   FROM people as p
+                   JOIN mtm_credits as m ON p.id = m.person_id
+                   JOIN movies as mv ON mv.id = m.movie_id
+                   WHERE p.name = 'Ben Affleck') AND
+      p.name != 'Ben Affleck'
+

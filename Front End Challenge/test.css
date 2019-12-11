@@ -1,0 +1,49 @@
+body {
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+.header-text{
+   margin: auto;
+   width: 100%;
+   text-align: center;
+}
+
+.greeting-text {
+    display: flex;
+    justify-content: center;
+}
+
+.world-text {
+    color: white;
+    background: black;
+}
+
+.Ray {
+    color: red;
+    background: black;
+}
+
+.Oscar {
+    color: orange;
+    background: black;
+}
+
+.Gwen {
+    color: green;
+    background: black;
+}
+
+.Bob {
+    color: blue;
+    background: yellow;
+}
+
+.Marie {
+    color: magenta;
+    background: black;
+}
+
