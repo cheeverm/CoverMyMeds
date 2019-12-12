@@ -13,7 +13,7 @@ namespace ConsoleApp1
 		{
 			int chunkSize = 80;
 
-			string text = System.IO.File.ReadAllText(@"D:\Projects\ConsoleApp1\text.txt");
+			string text = System.IO.File.ReadAllText(@"..\..\..\text.txt");
 
 			//split into paragraphs
 			var paragraphs = text.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None).ToList();
